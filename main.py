@@ -18,12 +18,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
-
+#DATABASE_URL = os.getenv("DATABASE_URL")
 ##CONNECT TO DB
 # this uses the postgres db available on hiroku as db and as the sqlite as backup
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blog.db").replace(
-        'postgres://ncjskhcqlfofjr:d63ac23235b10fafa24f3e7b3a60bb142cc27be81723f33eef99f7b182f9db97@ec2-34-231-63-30.compute-1.amazonaws.com:5432/d7mknkvjnaiopm',
-    'postgresql://ncjskhcqlfofjr:d63ac23235b10fafa24f3e7b3a60bb142cc27be81723f33eef99f7b182f9db97@ec2-34-231-63-30.compute-1.amazonaws.com:5432/d7mknkvjnaiopm')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL1", "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
