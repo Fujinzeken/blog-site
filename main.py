@@ -21,11 +21,12 @@ Bootstrap(app)
 
 ##CONNECT TO DB
 # this uses the postgres db available on hiroku as db and as the sqlite as backup
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL1", "sqlite:///blog.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blog.db").replace(
+        'postgres://', 'postgresql://')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-db.create_all()
+
 # gravatar is used to allow user avatar to show up on comments
 gravatar = Gravatar(app,
                     size=100,
