@@ -23,10 +23,13 @@ Bootstrap(app)
 # this uses the postgres db available on hiroku as db and as the sqlite as backup
 import re
 
+# "sqlite:///blog.db" local sqlite db, can be used in the place of DATABASE_URL or beside it.
+
 #uri = os.environ.get("DATABASE_URL")  # or other relevant config var
 #if uri.startswith("postgres://"):
 #   uri = uri.replace("postgres://", "postgresql://", 1)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blog.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL").replace(
+        'postgres://', 'postgresql://')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
